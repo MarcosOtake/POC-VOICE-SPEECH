@@ -63,7 +63,7 @@ class _VoiceCommandAppState extends State<VoiceCommandApp> {
     if (_speechEnabled) {
       await _speechToText.listen(
         onResult: _onSpeechResult,
-        localeId: 'pt_BR', // Força reconhecimento em português
+        localeId: 'pt_BR',
       );
     } else {
       print("Speech recognition not available");
@@ -76,19 +76,11 @@ class _VoiceCommandAppState extends State<VoiceCommandApp> {
     setState(() {});
   }
 
-  // void _onSpeechResult(SpeechRecognitionResult result) {
-  //   setState(() {
-  //     _lastWords = result.recognizedWords;
-  //     _processCommand(_lastWords);
-  //   });
-  // }
-
   void _onSpeechResult(SpeechRecognitionResult result) {
     setState(() {
       _lastWords = result.recognizedWords;
     });
 
-    // Só processa o comando se for o resultado final
     if (result.finalResult) {
       _processCommand(result.recognizedWords);
     }
